@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
-    <changeSet author="khai (generated)" id="1647278478208-1">
+    <changeSet author="unknown" id="1647278478208-1">
         <createTable tableName="product">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="product_pkey"/>
@@ -17,7 +17,7 @@
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
         </createTable>
     </changeSet>
-    <changeSet author="khai (generated)" id="1647278478208-2">
+    <changeSet author="unknown" id="1647278478208-2">
         <createTable tableName="my_user">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="my_user_pkey"/>
@@ -35,10 +35,10 @@
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
         </createTable>
     </changeSet>
-    <changeSet author="khai (generated)" id="1647278478208-3">
+    <changeSet author="unknown" id="1647278478208-3">
         <addUniqueConstraint columnNames="product_name" constraintName="uk_383i0awxqlq7pc33hil7afbgo" tableName="product"/>
     </changeSet>
-    <changeSet author="khai (generated)" id="1647278478208-4">
+    <changeSet author="unknown" id="1647278478208-4">
         <addUniqueConstraint columnNames="username" constraintName="uk_sfp0l65piri344cgr5yiugcd3" tableName="my_user"/>
     </changeSet>
 </databaseChangeLog>

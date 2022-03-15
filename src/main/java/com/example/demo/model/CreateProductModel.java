@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import javax.validation.constraints.NotNull;
+
 public class CreateProductModel {
 	
 	private String productName;
@@ -19,6 +21,7 @@ public class CreateProductModel {
 	/**
 	 * @return the productName
 	 */
+	@NotNull
 	public String getProductName() {
 		return productName;
 	}
@@ -33,6 +36,7 @@ public class CreateProductModel {
 	/**
 	 * @return the price
 	 */
+	@NotNull
 	public long getPrice() {
 		return price;
 	}

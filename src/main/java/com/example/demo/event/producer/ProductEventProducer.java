@@ -13,6 +13,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.example.demo.event.constant.Constant;
 import com.example.demo.event.model.Search;
 import com.example.demo.event.model.UserViewProduct;
 import com.example.demo.model.ProductModel;
@@ -28,7 +29,7 @@ public class ProductEventProducer {
 	private Properties properties = new Properties();
 	
 	public ProductEventProducer() {
-		properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+		properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, Constant.KAFKA_BOOTSTRAP_SERVER);
 		properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		
@@ -57,15 +58,9 @@ public class ProductEventProducer {
 		Gson gson = new Gson();
 		Search search = new Search(userId, searchTerm);
 		
-		ProducerRecord<String, String> record = new ProducerRecord<>("demo_search", search.getUserID(), gson.toJson(search));
-        producer.send(record, (RecordMetadata r, Exception e) -> {
-            if (e != null) {
-                System.out.println("Error producing to topic " + r.topic());
-                e.printStackTrace();
-            }
-        });
+		ProducerRecord<String, String> record = new ProducerRecord<>(Constant.KAFKA_USER_SEARCH_TOPIC_NAME, search.getUserID(), gson.toJson(search));
 		
-		producer.flush();
+		writeRecord(record);
 	}
 	
 	public void writeClickEvent(String userId, ProductModel productClicked) {
@@ -74,9 +69,18 @@ public class ProductEventProducer {
 		}
 		
 		Gson gson = new Gson();
-		UserViewProduct userViewProduct = new UserViewProduct(userId, productClicked);
+		UserViewProduct userViewProduct = new UserViewProduct();
+		userViewProduct.setUserId(userId);
+		userViewProduct.setProductId(productClicked.getId());
+		userViewProduct.setProductName(productClicked.getProductName());
+
+		ProducerRecord<String, String> record = new ProducerRecord<>(Constant.KAFKA_USER_CLICK_TOPIC_NAME, userViewProduct.getUserId(), gson.toJson(userViewProduct));
 		
-		ProducerRecord<String, String> record = new ProducerRecord<>("demo_click", userViewProduct.getUserId(), gson.toJson(userViewProduct));
+		writeRecord(record);
+	}
+	
+	private void writeRecord(ProducerRecord<String, String> record) {
+		
         producer.send(record, (RecordMetadata r, Exception e) -> {
             if (e != null) {
                 System.out.println("Error producing to topic " + r.topic());

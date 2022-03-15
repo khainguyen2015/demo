@@ -1,18 +1,14 @@
 package com.example.demo.event.model;
 
-import com.example.demo.model.ProductModel;
 
 public class UserViewProduct {
 	
 	private String userId;
 	
-	private ProductModel productClicked;
-
-	public UserViewProduct(String userId, ProductModel productClicked) {
-		this.userId = userId;
-		this.productClicked = productClicked;
-	}
-
+	private String productId;
+	
+	private String productName;
+	
 	/**
 	 * @return the userId
 	 */
@@ -28,16 +24,30 @@ public class UserViewProduct {
 	}
 
 	/**
-	 * @return the productClicked
+	 * @return the productId
 	 */
-	public ProductModel getProductClicked() {
-		return productClicked;
+	public String getProductId() {
+		return productId;
 	}
 
 	/**
-	 * @param productClicked the productClicked to set
+	 * @param productId the productId to set
 	 */
-	public void setProductClicked(ProductModel productClicked) {
-		this.productClicked = productClicked;
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	/**
+	 * @return the productName
+	 */
+	public String getProductName() {
+		return productName;
+	}
+
+	/**
+	 * @param productName the productName to set
+	 */
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 }
